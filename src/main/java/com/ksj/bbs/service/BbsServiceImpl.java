@@ -19,4 +19,26 @@ public class BbsServiceImpl implements BbsService {
     public List<BbsVO> selectBbsMasterListPage(BbsVO bbsVO) {
         return bbsMapper.selectBbsMasterListPage(bbsVO);
     }
+
+    @Override
+    public BbsVO selectBbsInfo(BbsVO bbsVO) {
+        return bbsMapper.selectBbsInfo(bbsVO);
+    }
+
+    @Override
+    public void updateBbsMasterOne(BbsVO bbsVO) {
+        bbsMapper.updateBbsMasterOne(bbsVO);
+    }
+
+    @Override
+    public void createBbsMaster(BbsVO bbsVO) {
+        BbsVO newBbsVO = bbsMapper.selectBbsMaxKey();
+        String id = newBbsVO.getBbsId();
+        int num = Integer.parseInt(id.substring(3));
+        log.info("num : " + num);
+        id = String.format("BBS%03d", ++num);
+        bbsVO.setBbsId(id);
+
+        bbsMapper.createBbsMaster(bbsVO);
+    }
 }

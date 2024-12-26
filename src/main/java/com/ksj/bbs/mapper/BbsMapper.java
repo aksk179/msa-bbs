@@ -10,4 +10,11 @@ public interface BbsMapper {
 
     public List<BbsVO> selectBbsMasterListPage(BbsVO bbsVO);
 
+    public BbsVO selectBbsInfo(BbsVO bbsVO);
+
+    public void updateBbsMasterOne(BbsVO bbsVO);
+
+    public void createBbsMaster(BbsVO bbsVO);
+
+    public BbsVO selectBbsMaxKey();
 }
