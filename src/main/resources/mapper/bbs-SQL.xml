@@ -59,4 +59,10 @@
         select max(bbs_id) as bbs_id
         from bbs_master
     </select>
+
+    <!-- 게시판 삭제 -->
+    <delete id="deleteBbsMaster" parameterType="BbsVO">
+        delete from bbs_master
+        where bbs_id = #{bbsId}
+    </delete>
 </mapper>

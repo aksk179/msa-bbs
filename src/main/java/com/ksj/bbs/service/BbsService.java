@@ -13,4 +13,6 @@ public interface BbsService {
     public void updateBbsMasterOne(BbsVO bbsVO);
 
     public void createBbsMaster(BbsVO bbsVO);
+
+    public void deleteBbsMaster(BbsVO bbsVO);
 }

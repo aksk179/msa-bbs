@@ -41,4 +41,9 @@ public class BbsServiceImpl implements BbsService {
 
         bbsMapper.createBbsMaster(bbsVO);
     }
+
+    @Override
+    public void deleteBbsMaster(BbsVO bbsVO) {
+        bbsMapper.deleteBbsMaster(bbsVO);
+    }
 }

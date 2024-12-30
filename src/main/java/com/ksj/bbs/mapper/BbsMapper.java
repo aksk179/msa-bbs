@@ -17,4 +17,6 @@ public interface BbsMapper {
     public void createBbsMaster(BbsVO bbsVO);
 
     public BbsVO selectBbsMaxKey();
+
+    public void deleteBbsMaster(BbsVO bbsVO);
 }

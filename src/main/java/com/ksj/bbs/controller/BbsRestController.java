@@ -42,4 +42,17 @@ public class BbsRestController {
         }
         return ResponseEntity.ok(result);
     }
+
+    @RequestMapping(value = "/manager/delete_bbs_master.do", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, String>> deleteBbsMaster(@RequestBody BbsVO bbsVO) {
+        Map<String, String> result = new HashMap<>();
+        try {
+            bbsService.deleteBbsMaster(bbsVO);
+            result.put("code", "Y");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("code", "N");
+        }
+        return ResponseEntity.ok(result);
+    }
 }

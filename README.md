@@ -25,7 +25,7 @@
 <button type="button" th:if="${bbsId == '' || bbsId == null}"     class="btn btn-primary" onclick="save('CREATE')"><span th:text="${btnName}">등록</span></button>
 <button type="button" th:unless="${bbsId == '' || bbsId == null}" class="btn btn-primary" onclick="save('UPDATE')"><span th:text="${btnName}">수정</span></button>
 ```
-```dtd
+```shell
 var url = '';
 if (mode === 'CREATE') {
     url = '/manager/create_bbs_master.do';
@@ -33,3 +33,30 @@ if (mode === 'CREATE') {
     url = '/manager/update_bbs_master.do';
 }
 ```
+
+## 12.29 정리
+* 삭제 기능
+  ```shell
+  <a class="btn btn-sm btn-danger" th:attr="data-bbs-id=${bbs.bbsId}" onclick="deleteBbsMaster(this)">삭제</a>
+  ```
+  * thymleaf에서는 문자열 데이터를 이벤트 핸들러 속성에 직접 사용하려고 하면 보안상의 이유로 제한 발생. 숫자나 boolean 값만 신뢰함.
+    * 해결방법 => data-* 속성을 사용.
+
+### 재가동하지 않고 변경사항 반영하기
+  1. application.properties설정
+  ```properties
+  spring.thymeleaf.cache=false
+  spring.thymeleaf.prefix=classpath:/templates/
+  spring.thymeleaf.suffix=.html
+  ```
+  2. spring boot devtools 사용
+  ```xml
+  <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+  </dependency>
+  ```
+  3. File > Settings > Advanced Settings > Allow auto-make to start even if developed application is currently running 활성화
+  
+* 게시글 기능 DB 설계 및 생성완료 PPT참고
