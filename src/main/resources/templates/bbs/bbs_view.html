@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<th:block th:replace="/fragments/header"></th:block>
+<div class="container mt-5">
+    <!-- 게시글 상세 -->
+    <div class="mb-4">
+        <label for="title"><b>제목:</b></label>
+        <input type="text" id="title" name="title" class="form-control" th:value="${bbs.bbsTitle}" readonly>
+    </div>
+
+    <div class="mb-4">
+        <label><b>첨부파일:</b></label>
+        <div>
+            <ul>
+                <!-- 첨부파일 목록 -->
+                <li th:each="file : ${bbsAttachList}">
+                    <a th:href="@{'${bbsAttachPath}'}" th:text="${file.bbsAttachName}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label><b>내용:</b></label>
+        <textarea class="form-control" rows="10" readonly th:text="${bbs.bbsContents}"></textarea>
+    </div>
+
+    <button class="btn btn-secondary" type="button" th:data-index="${bbs.bbsId}" onclick="goList(this.getAttribute('data-index'))">목록</button>
+
+    <!-- 댓글 리스트 -->
+    <div class="mt-5">
+        <h5>댓글</h5>
+        <div th:each="cmt : ${bbsCmtList}">
+            <div class="border-bottom mb-2 pb-2">
+                <p><b th:text="${cmt.bbsCmtWriter}">작성자</b></p>
+                <p th:text="${cmt.bbsComment}">댓글 내용</p>
+                <p class="text-muted" th:text="${cmt.bbsCmtWtime}"></p>
+                <button class="btn btn-sm btn-outline-primary" th:onclick="|location.href='/bbs/reply?bbsCmtSeq=' + ${cmt.bbsCmtSeq}|">답글쓰기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 댓글 입력 -->
+    <div class="mt-4">
+        <h5>댓글 작성</h5>
+        <form action="/bbs/comment" method="post">
+            <textarea class="form-control mb-2" name="commentContent" rows="3" placeholder="댓글 내용을 입력하세요"></textarea>
+            <button class="btn btn-primary" type="submit">등록</button>
+        </form>
+    </div>
+</div>
+<script>
+    function goList(id) {
+        var url = '';
+        url = '/bbs/bbs_main.page/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function() {
+                location.href = url;
+            },
+            error: function() {
+                alert("저장 중 오류가 발생했습니다.");
+            }
+        });
+    }
+</script>
+</body>
+</html>

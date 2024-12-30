@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ksj.bbs.mapper.BbsMainMapper">
+
+    <!-- 게시판별 게시글리스트 조회 -->
+    <select id="selectBbsList" parameterType="BbsMainVO" resultType="BbsMainVO">
+        select bbs_id, bbs_no, bbs_title, bbs_wtime, bbs_writer_name, bbs_view_count
+        from bbs_main
+        where bbs_id = #{bbsId}
+        order by bbs_no desc
+    </select>
+
+    <!-- 게시글 정보 조회 -->
+    <select id="selectBbsInfo" parameterType="BbsMainVO" resultType="BbsMainVO">
+        select bbs_id, bbs_no, bbs_title, bbs_contents
+        from bbs_main
+        where bbs_id = #{bbsId}
+        and bbs_no = #{bbsNo}
+    </select>
+
+    <!-- 게시글 첨부파일 정보 조회 -->
+    <select id="selectBbsAttachList" parameterType="BbsAttachVO" resultType="BbsAttachVO">
+        select bbs_attach_seq, bbs_attach_name, bbs_attach_size, bbs_attach_path
+        from bbs_attach
+        where bbs_id = #{bbsId}
+        and bbs_no = #{bbsNo}
+    </select>
+
+    <!-- 게시글 댓글 정보 조회 -->
+    <select id="selectBbsCmtList" parameterType="BbsCommentVO" resultType="BbsCommentVO">
+        select bbs_cmt_seq, bbs_cmt_writer, bbs_cmt_wtime, bbs_comment, bbs_cmt_upseq
+        from bbs_comment
+        where bbs_id = #{bbsId}
+        and bbs_no = #{bbsNo}
+    </select>
+</mapper>

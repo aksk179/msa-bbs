@@ -60,3 +60,10 @@ if (mode === 'CREATE') {
   3. File > Settings > Advanced Settings > Allow auto-make to start even if developed application is currently running 활성화
   
 * 게시글 기능 DB 설계 및 생성완료 PPT참고
+
+## 12.30 정리
+* 게시글 조회
+* bbs_ main / master 분리
+* 게시글 조회 할 때 sql에서 join해서 가져오면 중복됌.(ex) 첨부파일이 두 개, 댓글이 두 개면 총 네 개가 조회되어버림.)
+* 각자 조회해오는 service를 만들고, controller단에서 조합해서 화면으로 던져주기
+* 잘 안 될때는 일단 코딩해보고 중복되는 부분을 변수화하고, 하나로 합치기. 하드코딩X!

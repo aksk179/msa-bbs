@@ -3,7 +3,7 @@ package com.ksj.bbs.vo;
 import lombok.Data;
 
 @Data
-public class BbsVO {
+public class BbsMasterVO {
     private String bbsId;
     private String bbsName;
     private String bbsReplyYn;

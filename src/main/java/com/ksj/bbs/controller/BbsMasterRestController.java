@@ -1,7 +1,7 @@
 package com.ksj.bbs.controller;
 
-import com.ksj.bbs.service.BbsService;
-import com.ksj.bbs.vo.BbsVO;
+import com.ksj.bbs.service.BbsMasterService;
+import com.ksj.bbs.vo.BbsMasterVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +12,16 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-public class BbsRestController {
+public class BbsMasterRestController {
 
     @Autowired
-    BbsService bbsService;
+    BbsMasterService bbsMasterService;
 
     @RequestMapping(value = "/manager/update_bbs_master.do", method = RequestMethod.POST)
-    public ResponseEntity<Map<String, String>> updateBbsMaster(@RequestBody BbsVO bbsVO) {
+    public ResponseEntity<Map<String, String>> updateBbsMaster(@RequestBody BbsMasterVO bbsVO) {
         Map<String, String> result = new HashMap<>();
         try {
-            bbsService.updateBbsMasterOne(bbsVO);
+            bbsMasterService.updateBbsMasterOne(bbsVO);
             result.put("code", "Y");
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,10 +31,10 @@ public class BbsRestController {
     }
 
     @RequestMapping(value = "/manager/create_bbs_master.do", method = RequestMethod.POST)
-    public ResponseEntity<Map<String, String>> createBbsMaster(@RequestBody BbsVO bbsVO) {
+    public ResponseEntity<Map<String, String>> createBbsMaster(@RequestBody BbsMasterVO bbsVO) {
         Map<String, String> result = new HashMap<>();
         try {
-            bbsService.createBbsMaster(bbsVO);
+            bbsMasterService.createBbsMaster(bbsVO);
             result.put("code", "Y");
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,10 +44,10 @@ public class BbsRestController {
     }
 
     @RequestMapping(value = "/manager/delete_bbs_master.do", method = RequestMethod.POST)
-    public ResponseEntity<Map<String, String>> deleteBbsMaster(@RequestBody BbsVO bbsVO) {
+    public ResponseEntity<Map<String, String>> deleteBbsMaster(@RequestBody BbsMasterVO bbsVO) {
         Map<String, String> result = new HashMap<>();
         try {
-            bbsService.deleteBbsMaster(bbsVO);
+            bbsMasterService.deleteBbsMaster(bbsVO);
             result.put("code", "Y");
         } catch (Exception e) {
             e.printStackTrace();
