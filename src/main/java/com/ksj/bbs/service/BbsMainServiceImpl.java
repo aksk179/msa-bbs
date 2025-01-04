@@ -38,4 +38,18 @@ public class BbsMainServiceImpl implements BbsMainService {
     public List<BbsCommentVO> selectBbsCmtList(BbsCommentVO bbsCommentVO) {
         return bbsMainMapper.selectBbsCmtList(bbsCommentVO);
     }
+
+    @Override
+    public void createCmt(BbsCommentVO bbsCommentVO) {
+        BbsCommentVO resultCmtVO = bbsMainMapper.selectCmtMaxSeq(bbsCommentVO);
+        int seq = resultCmtVO.getBbsCmtSeq();
+
+        bbsCommentVO.setBbsCmtSeq(seq+1);
+        bbsMainMapper.createCmt(bbsCommentVO);
+    }
+
+    @Override
+    public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO) {
+        return bbsMainMapper.selectCmt(bbsCommentVO);
+    }
 }

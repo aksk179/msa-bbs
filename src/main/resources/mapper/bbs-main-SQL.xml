@@ -36,4 +36,26 @@
         where bbs_id = #{bbsId}
         and bbs_no = #{bbsNo}
     </select>
+
+    <!-- 댓글 달기 -->
+    <insert id="createCmt" parameterType="BbsCommentVO">
+        insert into bbs_comment (bbs_id, bbs_no, bbs_cmt_seq, bbs_cmt_writer, bbs_cmt_wtime, bbs_comment, bbs_cmt_upseq) VALUES
+        (#{bbsId}, #{bbsNo}, #{bbsCmtSeq}, #{bbsCmtWriter}, now(), #{bbsComment}, #{bbsCmtUpseq})
+    </insert>
+
+    <!-- 댓글 max seq 조회 -->
+    <select id="selectCmtMaxSeq" parameterType="BbsCommentVO" resultType="BbsCommentVO">
+        select max(bbs_cmt_seq) as bbs_cmt_seq
+        from bbs_comment
+        where bbs_id = #{bbsId}
+    </select>
+
+    <!-- 댓글 조회 -->
+    <select id="selectCmt" parameterType="BbsCommentVO" resultType="BbsCommentVO">
+        select bbs_id, bbs_no, bbs_cmt_seq, bbs_cmt_writer, bbs_cmt_wtime, bbs_comment, bbs_cmt_upseq
+        from bbs_comment
+        where bbs_id = #{bbsId}
+        and bbs_no = #{bbsNo}
+        and bbs_cmt_seq = #{bbsCmtSeq}
+    </select>
 </mapper>

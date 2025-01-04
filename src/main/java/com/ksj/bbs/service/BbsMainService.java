@@ -16,4 +16,8 @@ public interface BbsMainService {
     public List<BbsAttachVO> selectBbsAttachList(BbsAttachVO bbsAttachVO);
 
     public List<BbsCommentVO> selectBbsCmtList(BbsCommentVO bbsCommentVO);
+
+    public void createCmt(BbsCommentVO bbsCommentVO);
+
+    public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO);
 }

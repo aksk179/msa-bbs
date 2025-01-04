@@ -18,4 +18,10 @@ public interface BbsMainMapper {
     public List<BbsAttachVO> selectBbsAttachList(BbsAttachVO bbsAttachVO);
 
     public List<BbsCommentVO> selectBbsCmtList(BbsCommentVO bbsCommentVO);
+
+    public void createCmt(BbsCommentVO bbsCommentVO);
+
+    public BbsCommentVO selectCmtMaxSeq(BbsCommentVO bbsCommentVO);
+
+    public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO);
 }
