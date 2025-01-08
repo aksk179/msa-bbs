@@ -24,4 +24,6 @@ public interface BbsMainMapper {
     public BbsCommentVO selectCmtMaxSeq(BbsCommentVO bbsCommentVO);
 
     public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO);
+
+    public List<BbsCommentVO> selectBbsReplyList(BbsCommentVO bbsReplyVO);
 }

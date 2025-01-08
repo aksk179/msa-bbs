@@ -20,4 +20,6 @@ public interface BbsMainService {
     public void createCmt(BbsCommentVO bbsCommentVO);
 
     public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO);
+
+    public List<BbsCommentVO> selectBbsReplyList(BbsCommentVO bbsReplyVO);
 }

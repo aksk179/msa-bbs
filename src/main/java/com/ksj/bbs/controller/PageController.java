@@ -102,7 +102,16 @@ public class PageController {
             bbsCommentVO.setBbsId(bbsId);
             bbsCommentVO.setBbsNo(bbsNo);
             List<BbsCommentVO> resultCmtVO = bbsMainService.selectBbsCmtList(bbsCommentVO);
+            log.info("resultCmtVO : " + resultCmtVO.toString());
             model.addAttribute("bbsCmtList", resultCmtVO);
+
+            //bbs_reply
+//            BbsCommentVO bbsReplyVO = new BbsCommentVO();
+//            bbsReplyVO.setBbsId(bbsId);
+//            bbsReplyVO.setBbsNo(bbsNo);
+//            List<BbsCommentVO> resultReplyVO = bbsMainService.selectBbsReplyList(bbsReplyVO);
+//            log.info("resultReplyVO : " + resultReplyVO.toString());
+//            model.addAttribute("bbsReplyList", resultReplyVO);
         }
     }
 }

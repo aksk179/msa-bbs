@@ -27,6 +27,7 @@ public class BbsRestController {
             memberVO.setName("황희찬");
 
             bbsCommentVO.setBbsCmtWriter(memberVO.getName());
+            log.info("bbsCommentVO : " + bbsCommentVO.toString());
             bbsMainService.createCmt(bbsCommentVO);
             BbsCommentVO newBbsCmtVO = bbsMainService.selectCmt(bbsCommentVO);
             result.put("newBbsCmtVO", newBbsCmtVO);
@@ -38,5 +39,24 @@ public class BbsRestController {
         return ResponseEntity.ok(result);
     }
 
+    @RequestMapping(value = "/bbs/createReply.do", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, Object>> createReply(@RequestBody BbsCommentVO bbsReplyVO) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            MemberVO memberVO = new MemberVO();
+            memberVO.setId("TTTT3");
+            memberVO.setName("이강인");
 
+            bbsReplyVO.setBbsCmtWriter(memberVO.getName());
+            log.info("bbsReplyVO : " + bbsReplyVO.toString());
+            bbsMainService.createCmt(bbsReplyVO);
+            BbsCommentVO newReplyVO = bbsMainService.selectCmt(bbsReplyVO);
+            result.put("newReplyVO", newReplyVO);
+            result.put("code", "Y");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("code", "N");
+        }
+        return ResponseEntity.ok(result);
+    }
 }
