@@ -14,4 +14,5 @@ public class BbsMainVO {
     private String bbsWriterName;
     private String bbsWriterId;
     private int bbsViewCount;
+    private int newTime;
 }

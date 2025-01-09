@@ -7,7 +7,7 @@
 
     <!-- 게시판별 게시글리스트 조회 -->
     <select id="selectBbsList" parameterType="BbsMainVO" resultType="BbsMainVO">
-        select bbs_id, bbs_no, bbs_title, bbs_wtime, bbs_writer_name, bbs_view_count
+        select bbs_id, bbs_no, bbs_title, bbs_wtime, bbs_writer_name, bbs_view_count, (EXTRACT(EPOCH FROM NOW() - bbs_wtime) / 3600) AS new_time
         from bbs_main
         where bbs_id = #{bbsId}
         order by bbs_no desc
@@ -92,14 +92,5 @@
         where bbs_id = #{bbsId}
         and bbs_no = #{bbsNo}
         and bbs_cmt_seq = #{bbsCmtSeq}
-    </select>
-
-    <!-- 답글리스트 조회 -->
-    <select id="selectBbsReplyList" parameterType="BbsCommentVO" resultType="BbsCommentVO">
-        select bbs_cmt_seq, bbs_cmt_writer, bbs_cmt_wtime, bbs_comment, bbs_cmt_upseq
-        from bbs_comment
-        where bbs_id = #{bbsId}
-        and bbs_no = #{bbsNo}
-        and bbs_cmt_upseq != 0
     </select>
 </mapper>

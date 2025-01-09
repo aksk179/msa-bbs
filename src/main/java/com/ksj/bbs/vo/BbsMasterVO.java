@@ -11,4 +11,5 @@ public class BbsMasterVO {
     private int bbsFileSize;
     private int bbsNewHour;
     private String bbsWriterViewYn;
+    private String bbsUserWriteYn;
 }

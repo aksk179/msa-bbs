@@ -76,3 +76,47 @@ if (mode === 'CREATE') {
     * now()로 넣고, 댓글 조회해와서 result.put() 하기  ==> 이게 제일 좋은 방법 나중에 보안도 생각하면..
   2. java에서 시간 넣기
   3. javascript에서 시간 넣기
+
+## 01.06 wjdfl
+* 게시글 답글 기능
+* recursive() 상-하위 관계별로 조회해오는 sql문 이용.
+  ```shell
+  WITH RECURSIVE find_cmt(bbs_id, bbs_no, bbs_cmt_seq, bbs_cmt_writer, bbs_cmt_wtime, bbs_comment, bbs_cmt_upseq)
+        AS (
+        -- START_QUERY: 최상위 댓글 찾기
+        SELECT bbs_id, bbs_no, bbs_cmt_seq, bbs_cmt_writer, bbs_cmt_wtime, bbs_comment, bbs_cmt_upseq
+        FROM bbs_comment
+        WHERE 1=1
+        AND bbs_id = #{bbsId}
+        AND bbs_no = #{bbsNo}
+        AND bbs_cmt_upseq = 0
+
+        UNION ALL
+
+        -- REPEAT_QUERY: 답글 찾기
+        SELECT bc.bbs_id, bc.bbs_no, bc.bbs_cmt_seq, bc.bbs_cmt_writer, bc.bbs_cmt_wtime, bc.bbs_comment, bc.bbs_cmt_upseq
+        FROM find_cmt fc
+        INNER JOIN bbs_comment bc
+        ON fc.bbs_cmt_seq = bc.bbs_cmt_upseq -- 부모 댓글-답글 관계
+        AND bc.bbs_id = #{bbsId}                -- 동일 게시글
+        AND bc.bbs_no = #{bbsNo}                   -- 동일 게시글 번호
+        )
+        -- VIEW_QUERY
+        SELECT *
+        FROM find_cmt
+        ORDER BY
+        CASE
+        WHEN bbs_cmt_upseq = 0 THEN bbs_cmt_seq -- 댓글은 그대로 시간순으로 정렬
+        ELSE bbs_cmt_upseq                     -- 답글은 부모 댓글 바로 아래로 정렬
+        END,
+        bbs_cmt_seq
+  ```
+
+## 01.09 정리
+* 게시판 성격별 미완성 기능 추가
+* bbsUserWriteYn 컬럼 추가
+* newHour 관련
+  * sql에서 처리 24h, 48h 등 시간단위 표시라서 이렇게 처리함.
+  ```shell
+    (EXTRACT(EPOCH FROM NOW() - bbs_wtime) / 3600) AS new_time
+  ```

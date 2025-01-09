@@ -23,7 +23,7 @@
         <input type="text" id="title" name="title" class="form-control" th:value="${bbs.bbsTitle}" readonly>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4" th:if="${masterVO.bbsFileYn == 'Y'}">
         <label><b>첨부파일:</b></label>
         <div>
             <ul>
@@ -43,7 +43,7 @@
     <button class="btn btn-secondary" type="button" th:data-index="${bbs.bbsId}" onclick="goList(this.getAttribute('data-index'))">목록</button>
 
     <!-- 댓글 리스트 -->
-    <div class="mt-5" id="cmt-list">
+    <div class="mt-5" id="cmt-list" th:if="${masterVO.bbsReplyYn == 'Y'}">
         <h5>댓글</h5>
         <div th:each="cmt : ${bbsCmtList}" th:id="'cmt-' + ${cmt.bbsCmtSeq}" th:class="${cmt.bbsCmtUpseq == 0} ? '' : 'ms-5'">
             <div class="border-bottom mb-2 pb-2">
@@ -65,7 +65,7 @@
     </div>
 
     <!-- 댓글 입력 -->
-    <div class="mt-4">
+    <div class="mt-4" th:if="${masterVO.bbsReplyYn == 'Y'}">
         <h5>댓글 작성</h5>
         <form action="" method="post">
             <textarea class="form-control mb-2" id="bbsComment" name="bbsComment" rows="3" placeholder="댓글 내용을 입력하세요"></textarea>

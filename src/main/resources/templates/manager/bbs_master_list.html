@@ -22,6 +22,7 @@
             <th>업로드크기</th>
             <th>new마크</th>
             <th>작성자 정보</th>
+            <th>일반사용자 글쓰기 허용</th>
             <th>작업</th>
         </tr>
         </thead>
@@ -34,6 +35,7 @@
             <td th:text="${#strings.append(bbs.bbsFileSize, 'MB')}"></td>
             <td th:text="${#strings.append(bbs.bbsNewHour, 'h')}"></td>
             <td th:text="${bbs.bbsWriterViewYn}"></td>
+            <td th:text="${bbs.bbsUserWriteYn}"></td>
             <td class="text-center">
                 <a th:href="@{'/manager/create_bbs_master.page/' + ${bbs.bbsId}}" class="btn btn-sm btn-primary">수정</a>
                 <a class="btn btn-sm btn-danger" th:attr="data-bbs-id=${bbs.bbsId}" onclick="deleteBbsMaster(this)">삭제</a>

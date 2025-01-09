@@ -74,6 +74,18 @@
             </div>
         </div>
 
+        <!-- 일반 사용자 글쓰기 허용 -->
+        <div class="row mb-3 align-items-center">
+            <label for="bbsFileYn" class="col-sm-3 col-form-label text-end">일반 사용자 글쓰기 허용</label>
+            <div class="col-sm-9">
+                <select class="form-select" id="bbsUserWriteYn" name="bbsUserWriteYn" required>
+                    <option th:value="Y" th:selected="${bbsVO.bbsUserWriteYn == 'Y'}">허용</option>
+                    <option th:value="N" th:selected="${bbsVO.bbsUserWriteYn == 'N'}">비허용</option>
+                </select>
+                <div class="invalid-feedback">일반 사용자 글쓰기 허용 여부를 선택해주세요.</div>
+            </div>
+        </div>
+
         <!-- 저장 버튼 -->
         <div class="d-flex justify-content-center">
             <a href="#" th:onclick="'history.back();'" class="btn btn-secondary">취소</a>&nbsp;&nbsp;
@@ -108,6 +120,7 @@
         var bbsFileSize = $('#bbsFileSize').val();
         var bbsNewHour = $('#bbsNewHour').val();
         var bbsWriterViewYn = $('#bbsWriterViewYn').val();
+        var bbsUserWriteYn = $('#bbsUserWriteYn').val();
 
         var param = {};
         param.bbsId = bbsId;
@@ -117,6 +130,7 @@
         param.bbsFileSize = bbsFileSize;
         param.bbsNewHour = bbsNewHour;
         param.bbsWriterViewYn = bbsWriterViewYn;
+        param.bbsUserWriteYn = bbsUserWriteYn;
         console.log(param);
 
         var url = '';

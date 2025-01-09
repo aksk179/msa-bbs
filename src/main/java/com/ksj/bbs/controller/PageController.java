@@ -83,6 +83,12 @@ public class PageController {
             List<BbsMainVO> resultMainVO = bbsMainService.selectBbsList(bbsMainVO);
             model.addAttribute("bbsList", resultMainVO);
         } else if (pageName.equals("bbs_view")) {
+            //게시판 성격 조회
+            BbsMasterVO bbsMasterVO = new BbsMasterVO();
+            bbsMasterVO.setBbsId(bbsId);
+            BbsMasterVO resultMasterVO = bbsMasterService.selectBbsMasterInfo(bbsMasterVO);
+            model.addAttribute("masterVO", resultMasterVO);
+
             //bbs_main
             BbsMainVO bbsMainVO = new BbsMainVO();
             bbsMainVO.setBbsId(bbsId);
@@ -104,14 +110,10 @@ public class PageController {
             List<BbsCommentVO> resultCmtVO = bbsMainService.selectBbsCmtList(bbsCommentVO);
             log.info("resultCmtVO : " + resultCmtVO.toString());
             model.addAttribute("bbsCmtList", resultCmtVO);
-
-            //bbs_reply
-//            BbsCommentVO bbsReplyVO = new BbsCommentVO();
-//            bbsReplyVO.setBbsId(bbsId);
-//            bbsReplyVO.setBbsNo(bbsNo);
-//            List<BbsCommentVO> resultReplyVO = bbsMainService.selectBbsReplyList(bbsReplyVO);
-//            log.info("resultReplyVO : " + resultReplyVO.toString());
-//            model.addAttribute("bbsReplyList", resultReplyVO);
+        } else if (pageName.equals("create_bbs")) {
+            if (bbsId.equals("BBS001")) {
+                
+            }
         }
     }
 }

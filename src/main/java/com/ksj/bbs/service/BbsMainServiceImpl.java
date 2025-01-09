@@ -52,9 +52,4 @@ public class BbsMainServiceImpl implements BbsMainService {
     public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO) {
         return bbsMainMapper.selectCmt(bbsCommentVO);
     }
-
-    @Override
-    public List<BbsCommentVO> selectBbsReplyList(BbsCommentVO bbsReplyVO) {
-        return bbsMainMapper.selectBbsReplyList(bbsReplyVO);
-    }
 }
