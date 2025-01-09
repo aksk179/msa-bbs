@@ -52,4 +52,13 @@ public class BbsMainServiceImpl implements BbsMainService {
     public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO) {
         return bbsMainMapper.selectCmt(bbsCommentVO);
     }
+
+    @Override
+    public void createBbs(BbsMainVO bbsMainVO) {
+        BbsMainVO resultVO = bbsMainMapper.selectMaxBbsNo(bbsMainVO);
+        int bbsNo = resultVO.getBbsNo();
+
+        bbsMainVO.setBbsNo(bbsNo+1);
+        bbsMainMapper.createBbs(bbsMainVO);
+    }
 }

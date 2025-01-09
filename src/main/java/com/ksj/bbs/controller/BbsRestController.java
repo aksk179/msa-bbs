@@ -2,6 +2,7 @@ package com.ksj.bbs.controller;
 
 import com.ksj.bbs.service.BbsMainService;
 import com.ksj.bbs.vo.BbsCommentVO;
+import com.ksj.bbs.vo.BbsMainVO;
 import com.ksj.bbs.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class BbsRestController {
         Map<String, Object> result = new HashMap<>();
         try {
             MemberVO memberVO = new MemberVO();
-            memberVO.setId("TTTT2");
+            memberVO.setId("TTTT5");
             memberVO.setName("황희찬");
 
             bbsCommentVO.setBbsCmtWriter(memberVO.getName());
@@ -52,6 +53,27 @@ public class BbsRestController {
             bbsMainService.createCmt(bbsReplyVO);
             BbsCommentVO newReplyVO = bbsMainService.selectCmt(bbsReplyVO);
             result.put("newReplyVO", newReplyVO);
+            result.put("code", "Y");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("code", "N");
+        }
+        return ResponseEntity.ok(result);
+    }
+
+    @RequestMapping(value = "/bbs/create_bbs.do", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, String>> createBbs(@RequestBody BbsMainVO bbsMainVO) {
+        Map<String, String> result = new HashMap<>();
+        log.info("BbsMainVO : " + bbsMainVO);
+        try {
+            MemberVO memberVO = new MemberVO();
+            memberVO.setId("TTTT2");
+            memberVO.setName("황희찬");
+
+            bbsMainVO.setBbsWriterId(memberVO.getId());
+            bbsMainVO.setBbsWriterName(memberVO.getName());
+            log.info("BbsMainVO : " + bbsMainVO);
+            bbsMainService.createBbs(bbsMainVO);
             result.put("code", "Y");
         } catch (Exception e) {
             e.printStackTrace();

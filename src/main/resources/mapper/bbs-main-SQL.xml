@@ -93,4 +93,16 @@
         and bbs_no = #{bbsNo}
         and bbs_cmt_seq = #{bbsCmtSeq}
     </select>
+
+    <!-- 게시글 작성 -->
+    <insert id="createBbs" parameterType="BbsMainVO">
+        INSERT INTO bbs_main (bbs_id, bbs_no, bbs_title, bbs_contents, bbs_wtime, bbs_writer_name, bbs_writer_id) VALUES
+        (#{bbsId}, #{bbsNo}, #{bbsTitle}, #{bbsContents}, now(), #{bbsWriterName}, #{bbsWriterId})
+    </insert>
+
+    <select id="selectMaxBbsNo" parameterType="BbsMainVO" resultType="BbsMainVO">
+        select max(bbs_no) bbs_no
+        from bbs_main
+        where bbs_id = #{bbsId}
+    </select>
 </mapper>

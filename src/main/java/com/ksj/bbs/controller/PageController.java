@@ -108,11 +108,20 @@ public class PageController {
             bbsCommentVO.setBbsId(bbsId);
             bbsCommentVO.setBbsNo(bbsNo);
             List<BbsCommentVO> resultCmtVO = bbsMainService.selectBbsCmtList(bbsCommentVO);
-            log.info("resultCmtVO : " + resultCmtVO.toString());
             model.addAttribute("bbsCmtList", resultCmtVO);
         } else if (pageName.equals("create_bbs")) {
             if (bbsId.equals("BBS001")) {
-                
+                //게시판 성격 조회
+                BbsMasterVO bbsMasterVO = new BbsMasterVO();
+                bbsMasterVO.setBbsId(bbsId);
+                BbsMasterVO resultMasterVO = bbsMasterService.selectBbsMasterInfo(bbsMasterVO);
+                model.addAttribute("masterVO", resultMasterVO);
+
+                //bbs_main
+                BbsMainVO bbsMainVO = new BbsMainVO();
+                bbsMainVO.setBbsId(bbsId);
+                model.addAttribute("bbs", bbsMainVO);
+                model.addAttribute("btnName", "등록");
             }
         }
     }

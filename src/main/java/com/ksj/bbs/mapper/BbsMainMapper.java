@@ -3,7 +3,6 @@ package com.ksj.bbs.mapper;
 import com.ksj.bbs.vo.BbsAttachVO;
 import com.ksj.bbs.vo.BbsCommentVO;
 import com.ksj.bbs.vo.BbsMainVO;
-import com.ksj.bbs.vo.BbsMasterVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -24,4 +23,8 @@ public interface BbsMainMapper {
     public BbsCommentVO selectCmtMaxSeq(BbsCommentVO bbsCommentVO);
 
     public BbsCommentVO selectCmt(BbsCommentVO bbsCommentVO);
+
+    public void createBbs(BbsMainVO bbsMainVO);
+
+    public BbsMainVO selectMaxBbsNo(BbsMainVO bbsMainVO);
 }

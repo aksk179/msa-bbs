@@ -7,11 +7,10 @@
 </head>
 <body>
 <th:block th:replace="/fragments/header"></th:block>
-
 <div class="container mt-4">
     <h1 class="mb-4 text-center"><span th:text="${masterVO.bbsName}">공지사항</span></h1>
     <div class="d-flex justify-content-end mb-3">
-        <button class="btn btn-sm btn-primary" type="button" th:if="${masterVO.bbsUserWriteYn == 'Y'}" th:onclick="location.href='/bbs/create_bbs.page'">게시글 작성</button>
+        <button class="btn btn-sm btn-primary" type="button" th:if="${masterVO.bbsUserWriteYn == 'Y'}" th:onclick="createBbs()">게시글 작성</button>
     </div>
     <table class="table table-bordered table-hover">
         <thead class="table-light text-center">
@@ -49,6 +48,15 @@
             });
         });
     });
+
+    function createBbs() {
+        const rows = document.querySelectorAll('tr[data-bbs-id]');
+        rows.forEach(function (dataset) {
+            const bbsId = dataset.getAttribute('data-bbs-id');
+            console.log(bbsId);
+            location.href = `/bbs/create_bbs.page/${bbsId}`;
+        });
+    }
 </script>
 </body>
 </html>
