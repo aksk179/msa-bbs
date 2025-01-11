@@ -120,3 +120,38 @@ if (mode === 'CREATE') {
   ```shell
     (EXTRACT(EPOCH FROM NOW() - bbs_wtime) / 3600) AS new_time
   ```
+  
+## 01.10 정리
+* 게시글 등록 기능 추가
+
+## 01.11 정리
+* jpa
+  1. dependency 추가
+  2. application.properties 추가
+* vo랑 model이랑 비슷한데 다름.
+* jpa에서 model을 정의할 때는 실제 테이블인지 명시해주는 게 있음.
+* dialect는 방언이라는 뜻. db가 다양하니까 내가 선택한 db로 하면 됌.
+
+* @entity 는 객체라는 뜻.
+* @Table은 DB 테이블 이름이랑 다를 때 지정.
+
+* @GeneratedValue(strategy = GenerationType.IDENTITY) 자동증가
+* @Column(nullable = false, unique = true)    //not null, unique
+* 생성자를 꼭 만들어줘야 함.
+
+* Repository
+* jpaRepository에서 기능들을 함수로 구현해놔있음. extends 해서 쓰면 됌.
+* postgre문법에 맞는 문장을 자동으로 만들어줌
+
+```java
+Role findByRoleName (String roleName); ==> where name = ${name}
+Role findByRoleNameContains (String roleName); ==> where name LIKE ${NAME} || '%'
+Role findByRoleNameContainsIgnoreCase (String roleName);  ==> where upper(name) LIKE upper (${NAME}) || '%'
+```
+
+```shell
+controller -> service -> mapper -> sql                    --> 기존
+                      -> reposotory -> model -> Dialect   --> jpa
+```
+
+* 테이블 생성하지 않아도 실행하면 테이블 만들어져 있음..
